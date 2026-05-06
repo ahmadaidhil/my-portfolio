@@ -47,12 +47,12 @@ const content = {
     projects: {
       sectionTitle: "Portfolio",
       items: [
-        { title: "E-Commerce App", tag: "Web Design", img: "https://picsum.photos/seed/proj1/800/500" },
-        { title: "Travel Landing Page", tag: "UI/UX", img: "https://picsum.photos/seed/proj2/800/500" },
-        { title: "Dashboard Analytics", tag: "Web App", img: "https://picsum.photos/seed/proj3/800/500" },
-        { title: "Mobile Banking UI", tag: "Mobile App", img: "https://picsum.photos/seed/proj4/800/500" },
-        { title: "Portfolio Website", tag: "Web Design", img: "https://picsum.photos/seed/proj5/800/500" },
-        { title: "Restaurant App", tag: "Branding", img: "https://picsum.photos/seed/proj6/800/500" },
+        { title: "E-Commerce App", tag: "Web Design", img: "https://picsum.photos/seed/proj1/800/500", url: "#" },
+        { title: "Travel Landing Page", tag: "UI/UX", img: "https://picsum.photos/seed/proj2/800/500", url: "#" },
+        { title: "Dashboard Analytics", tag: "Web App", img: "https://picsum.photos/seed/proj3/800/500", url: "#" },
+        { title: "Mobile Banking UI", tag: "Mobile App", img: "https://picsum.photos/seed/proj4/800/500", url: "#" },
+        { title: "Portfolio Website", tag: "Web Design", img: "porto-web.png", url: "https://ahmadaidhil.github.io/portofolio-divisi-web/" },
+        { title: "Restaurant App", tag: "Branding", img: "https://picsum.photos/seed/proj6/800/500", url: "#" },
       ],
     },
     skills: {
@@ -111,12 +111,12 @@ const content = {
     projects: {
       sectionTitle: "Portofolio",
       items: [
-        { title: "Aplikasi E-Commerce", tag: "Desain Web", img: "https://picsum.photos/seed/proj1/800/500" },
-        { title: "Halaman Travel", tag: "UI/UX", img: "https://picsum.photos/seed/proj2/800/500" },
-        { title: "Dashboard Analitik", tag: "Aplikasi Web", img: "https://picsum.photos/seed/proj3/800/500" },
-        { title: "UI Mobile Banking", tag: "Aplikasi Mobile", img: "https://picsum.photos/seed/proj4/800/500" },
-        { title: "Website Portofolio", tag: "Desain Web", img: "https://picsum.photos/seed/proj5/800/500" },
-        { title: "Aplikasi Restoran", tag: "Branding", img: "https://picsum.photos/seed/proj6/800/500" },
+        { title: "Aplikasi E-Commerce", tag: "Desain Web", img: "https://picsum.photos/seed/proj1/800/500", url: "#" },
+        { title: "Halaman Travel", tag: "UI/UX", img: "https://picsum.photos/seed/proj2/800/500", url: "#" },
+        { title: "Dashboard Analitik", tag: "Aplikasi Web", img: "https://picsum.photos/seed/proj3/800/500", url: "#" },
+        { title: "UI Mobile Banking", tag: "Aplikasi Mobile", img: "https://picsum.photos/seed/proj4/800/500", url: "#" },
+        { title: "Website Portofolio", tag: "Desain Web", img: "porto-web.png", url: "https://ahmadaidhil.github.io/portofolio-divisi-web/" },
+        { title: "Aplikasi Restoran", tag: "Branding", img: "https://picsum.photos/seed/proj6/800/500", url: "#" },
       ],
     },
     skills: {
@@ -353,29 +353,39 @@ export default function Home() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {t.projects.items.map((project, i) => (
-              <motion.div
+              <a
                 key={project.title}
-                className="group relative overflow-hidden rounded-2xl border border-foreground cursor-pointer"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.08 * i }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.02 }}
+                href={project.url}
+                target={project.url !== "#" ? "_blank" : undefined}
+                rel={project.url !== "#" ? "noopener noreferrer" : undefined}
+                className="block"
               >
-                {/* Image */}
-                <div className="relative w-full aspect-[16/10] overflow-hidden">
-                  <img
-                    src={project.img}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0"
-                  />
-                  {/* Overlay on hover */}
-                  <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/60 transition-all duration-300 flex flex-col items-center justify-center gap-2 opacity-0 group-hover:opacity-100">
-                    <span className="text-background text-sm font-semibold px-3 py-1 border border-background rounded-full">{project.tag}</span>
-                    <h3 className="text-background text-lg font-bold text-center px-4">{project.title}</h3>
+                <motion.div
+                  className="group relative overflow-hidden rounded-2xl border border-foreground cursor-pointer"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.08 * i }}
+                  viewport={{ once: true }}
+                  whileHover={{ scale: 1.02 }}
+                >
+                  {/* Image */}
+                  <div className="relative w-full aspect-[16/10] overflow-hidden">
+                    <img
+                      src={project.img}
+                      alt={project.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0"
+                    />
+                    {/* Overlay on hover */}
+                    <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/60 transition-all duration-300 flex flex-col items-center justify-center gap-2 opacity-0 group-hover:opacity-100">
+                      <span className="text-background text-sm font-semibold px-3 py-1 border border-background rounded-full">{project.tag}</span>
+                      <h3 className="text-background text-lg font-bold text-center px-4">{project.title}</h3>
+                      {project.url !== "#" && (
+                        <span className="text-background text-xs mt-1 opacity-80">↗ Visit Site</span>
+                      )}
+                    </div>
                   </div>
-                </div>
-              </motion.div>
+                </motion.div>
+              </a>
             ))}
           </div>
 

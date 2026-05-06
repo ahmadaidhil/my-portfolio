@@ -47,8 +47,8 @@ export default function Navbar() {
         { name: "Layanan", href: "#services" },
         { name: "Proyek", href: "#projects" },
         { name: "Keahlian", href: "#skills" },
-        { name: "Sertifikat", href: "#certificates" },
-        { name: "Kontak", href: "#contact" },
+        // { name: "Sertifikat", href: "#certificates" },
+        // { name: "Kontak", href: "#contact" },
       ]
       : [
         { name: "Home", href: "#home" },
@@ -56,8 +56,8 @@ export default function Navbar() {
         { name: "Services", href: "#services" },
         { name: "Projects", href: "#projects" },
         { name: "Skills", href: "#skills" },
-        { name: "Certificates", href: "#certificates" },
-        { name: "Contact", href: "#contact" },
+        // { name: "Certificates", href: "#certificates" },
+        // { name: "Contact", href: "#contact" },
       ];
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -76,8 +76,8 @@ export default function Navbar() {
       animate="visible"
       variants={headerVariants}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-          ? "bg-transparent backdrop-blur-md border-b border-foreground/20 py-2"
-          : "bg-transparent border-transparent py-4"
+        ? "bg-transparent backdrop-blur-md border-b border-foreground/20 py-2"
+        : "bg-transparent border-transparent py-4"
         }`}
     >
       <nav className="w-full flex items-center justify-between px-8 max-w-7xl mx-auto">
