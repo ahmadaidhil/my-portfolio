@@ -29,7 +29,7 @@ export default function RootLayout({
       className={`${inter.variable} h-full antialiased`}
     >
       <head>
-        <meta name="google-site-verification" content="dqzwnfyomiDhrhTWKmyOKVYGbhkUo4eqUS1tV3Vs_Io" />
+        <meta name="google-site-verification" content="Je91cZzog5HITVjS9lSvj2Ix0HY2OweSAw7YR6JTNFQ" />
       </head>
       <body className="min-h-full flex flex-col font-sans font-light">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
