@@ -28,6 +28,9 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${inter.variable} h-full antialiased`}
     >
+      <head>
+        <meta name="google-site-verification" content="dqzwnfyomiDhrhTWKmyOKVYGbhkUo4eqUS1tV3Vs_Io" />
+      </head>
       <body className="min-h-full flex flex-col font-sans font-light">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <LangProvider>
