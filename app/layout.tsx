@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { LangProvider } from "@/context/LangContext";
 import "./globals.css";
 
 const inter = Inter({
@@ -11,8 +13,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Mareta - Portfolio",
-  description: "Personal portfolio and journey of Mareta.",
+  title: "Achmad Aidhil - Portfolio",
+  description: "Personal portfolio of Achmad Aidhil.",
 };
 
 export default function RootLayout({
@@ -28,8 +30,11 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col font-sans font-light">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
-          <Navbar />
-          {children}
+          <LangProvider>
+            <Navbar />
+            {children}
+            <Footer />
+          </LangProvider>
         </ThemeProvider>
       </body>
     </html>
