@@ -28,6 +28,7 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${inter.variable} h-full antialiased`}
     >
+      {/* Google */}
       <head>
         <meta name="google-site-verification" content="Je91cZzog5HITVjS9lSvj2Ix0HY2OweSAw7YR6JTNFQ" />
       </head>
