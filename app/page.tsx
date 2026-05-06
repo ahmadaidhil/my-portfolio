@@ -450,7 +450,7 @@ export default function Home() {
                 {t.skills.soft.map((skill, i) => (
                   <motion.span
                     key={skill}
-                    className="px-5 py-2.5 border border-foreground rounded-full text-sm font-medium cursor-default"
+                    className="px-5 py-2.5 border border-foreground rounded-full text-sm font-medium cursor-default text-foreground"
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.4, delay: 0.08 * i }}
