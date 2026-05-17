@@ -154,28 +154,40 @@ export default function Home() {
   return (
     <main className="w-full flex flex-col">
       {/* Hero Section */}
-      <section id="home" className="min-h-[calc(100vh-100px)] flex items-center justify-center w-full">
-        <div className="max-w-6xl mx-auto px-8 w-full flex flex-col md:flex-row items-center justify-between mt-12 md:mt-0">
+      <section id="home" className="min-h-screen flex items-center justify-center w-full pt-32 md:pt-0 pb-12 md:pb-0">
+        <div className="max-w-6xl mx-auto px-8 w-full flex flex-col md:flex-row items-center justify-between">
 
           <motion.div
-            className="flex-1 flex flex-col items-start max-w-xl"
+            className="flex-1 flex flex-col items-center text-center md:items-start md:text-left max-w-xl relative"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <p className="text-xs font-semibold tracking-widest mb-6 uppercase">{t.hero.tagline}</p>
-            <h1 className="text-6xl font-normal tracking-tight mb-8 text-foreground">{t.hero.name}</h1>
-            <div className="space-y-1 mb-16 text-lg">
+            {/* Dekorasi khusus mobile sebagai pengganti foto */}
+            <motion.div 
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 w-72 h-72 md:hidden border border-foreground/10 rounded-full"
+              animate={{ rotate: 360, scale: [1, 1.1, 1] }}
+              transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+            />
+            <motion.div 
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 w-[20rem] h-[20rem] md:hidden border border-foreground/5 rounded-full border-dashed"
+              animate={{ rotate: -360 }}
+              transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+            />
+
+            <p className="text-xs font-semibold tracking-widest mb-4 md:mb-6 uppercase">{t.hero.tagline}</p>
+            <h1 className="text-5xl md:text-6xl font-normal tracking-tight mb-6 md:mb-8 text-foreground">{t.hero.name}</h1>
+            <div className="space-y-1 mb-10 md:mb-16 text-base md:text-lg">
               <p>{t.hero.line1}</p>
               <p>{t.hero.line2}</p>
             </div>
-            <div className="flex flex-wrap gap-4 text-sm">
-              {t.hero.badges.map((b) => <span key={b} className="font-medium">{b}</span>)}
+            <div className="flex flex-wrap justify-center md:justify-start gap-2 md:gap-4 text-xs md:text-sm">
+              {t.hero.badges.map((b) => <span key={b} className="font-medium px-3 py-1 border border-foreground/20 rounded-full">{b}</span>)}
             </div>
           </motion.div>
 
           <motion.div
-            className="flex-1 flex justify-end mt-16 md:mt-0 bg-white dark:bg-transparent rounded-2xl overflow-hidden p-4"
+            className="hidden md:flex flex-1 justify-end mt-16 md:mt-0 bg-white dark:bg-transparent rounded-2xl overflow-hidden p-4"
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
@@ -455,7 +467,7 @@ export default function Home() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.4, delay: 0.08 * i }}
                     viewport={{ once: true }}
-                    whileHover={{ scale: 1.08, backgroundColor: "var(--foreground)", color: "var(--background)" }}
+                    whileHover={{ scale: 1.08 }}
                   >
                     {skill}
                   </motion.span>
@@ -468,12 +480,12 @@ export default function Home() {
                 {["VS Code", "Figma", "Git", "GitHub", "Postman", "Laragon", "MySQL"].map((tool, i) => (
                   <motion.span
                     key={tool}
-                    className="px-4 py-2 border border-foreground/40 rounded-lg text-sm opacity-70 hover:opacity-100 transition-opacity cursor-default"
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: 0.06 * i }}
+                    className="px-5 py-2.5 border border-foreground rounded-full text-sm font-medium cursor-default text-foreground"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4, delay: 0.08 * i }}
                     viewport={{ once: true }}
-                    whileHover={{ scale: 1.05 }}
+                    whileHover={{ scale: 1.08 }}
                   >
                     {tool}
                   </motion.span>

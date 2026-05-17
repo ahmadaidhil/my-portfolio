@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
-import { motion, Variants } from "framer-motion";
+import { motion, Variants, AnimatePresence } from "framer-motion";
 import { useLang } from "@/context/LangContext";
 
 const headerVariants: Variants = {
@@ -31,6 +31,7 @@ export default function Navbar() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -60,14 +61,8 @@ export default function Navbar() {
         // { name: "Contact", href: "#contact" },
       ];
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href.startsWith("#")) {
-      e.preventDefault();
-      const target = document.querySelector(href);
-      if (target) {
-        target.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }
+  const handleNavClick = () => {
+    setIsMobileMenuOpen(false);
   };
 
   return (
@@ -102,7 +97,7 @@ export default function Navbar() {
             >
               <Link
                 href={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
+                onClick={handleNavClick}
                 className="hover:opacity-70 transition-opacity"
               >
                 {link.name}
@@ -112,13 +107,13 @@ export default function Navbar() {
         </div>
 
         {/* Actions */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-2 md:space-x-4">
           <motion.button
             variants={itemVariants}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setLang(lang === "EN" ? "ID" : "EN")}
-            className="px-3 py-1 text-sm border border-foreground rounded-full hover:bg-foreground hover:text-background transition-colors"
+            className="px-2 py-1 md:px-3 text-xs md:text-sm border border-foreground rounded-full hover:bg-foreground hover:text-background transition-colors"
           >
             {lang}
           </motion.button>
@@ -128,13 +123,49 @@ export default function Navbar() {
               whileHover={{ scale: 1.1, rotate: 15 }}
               whileTap={{ scale: 0.9 }}
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="p-2 hover:opacity-70 transition-opacity rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
+              className="p-1.5 md:p-2 hover:opacity-70 transition-opacity rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
             >
-              {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              {theme === "dark" ? <Sun className="w-4 h-4 md:w-5 md:h-5" /> : <Moon className="w-4 h-4 md:w-5 md:h-5" />}
             </motion.button>
           )}
+
+          {/* Mobile Menu Toggle */}
+          <motion.button
+            variants={itemVariants}
+            whileTap={{ scale: 0.9 }}
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden p-1.5 hover:opacity-70 transition-opacity rounded-full"
+          >
+            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </motion.button>
         </div>
       </nav>
+
+      {/* Mobile Menu Dropdown */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden bg-background/95 backdrop-blur-xl border-b border-foreground/10 overflow-hidden"
+          >
+            <div className="flex flex-col px-8 py-4 space-y-4 text-foreground">
+              {links.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={handleNavClick}
+                  className="text-lg font-medium hover:opacity-70 transition-opacity py-2 border-b border-foreground/5"
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.header>
   );
 }
